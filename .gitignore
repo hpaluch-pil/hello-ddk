@@ -1,0 +1,11 @@
+# .gitignore
+# vim
+*.swp
+*.tmp
+*.bak
+*~
+
+# VS files
+*.user
+.vs/
+x64/

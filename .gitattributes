@@ -1,0 +1,6 @@
+# use Unix LF even for git files
+*.md text eol=lf
+*.Filters text eol=lf
+.gitignore text eol=lf
+.gitattributes text eol=lf
+

@@ -1,0 +1,53 @@
+; sioctl.inf - manual installation for sioctl.sys
+; based on XP DDK code: src\kernel\mca\imca\sys\imca.inf 
+; WARNING! Supports amd64 only! (no 32-bit version)
+[Version] 
+Signature = "$Windows NT$" 
+Class=System
+ClassGUID={4d36e97d-e325-11ce-bfc1-08002be10318} 
+Provider=%PIL% 
+; Must have disabled Properties -> Inf2Cat -> General -> Run Inf2Cat
+; unless you have signatures etc...
+CatalogFile=nothing.cat
+DriverVer=9/23/2022,1.0.0.0
+
+[DestinationDirs]
+_SIOCTL.Files = 12
+
+[SourceDisksNames]
+0=%Desc_amd640%
+
+[SourceDisksFiles]
+sioctl.sys=0,\, 
+
+[Manufacturer] 
+%PIL%=PIL,NTx86,NTamd64
+
+[PIL.NTx86]
+%_SIOCTLDesc%=_SIOCTL_Inst,_SIOCTL0000
+
+[PIL.NTamd64]
+%_SIOCTLDesc%=_SIOCTL_Inst,_SIOCTL0000
+
+[_SIOCTL_Inst] 
+CopyFiles = _SIOCTL.Files
+
+[_SIOCTL_Inst.Services] 
+AddService = sioctl,0x00000002,_SIOCTL_Service_Inst, 
+
+[_SIOCTL_Service_Inst] 
+ServiceType = 1  ; SERVICE_KERNEL_DRIVER
+StartType = 1    ; SERVICE_SYSTEM_START 
+ErrorControl = 1 ; SERVICE_ERROR_NORMAL
+ServiceBinary = %12%\sioctl.sys 
+
+[_SIOCTL.Files] 
+sioctl.sys
+
+[Strings] 
+
+;  *******Localizable Strings******* 
+PIL= "Pickering Interfaces ltd." 
+Desc_amd640= "Disk2" 
+_SIOCTLDesc= "Pickering SIOCTL Driver" 
+
